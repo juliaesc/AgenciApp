@@ -1,42 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  KeyboardAvoidingView,
-  ImageBackground,
 } from 'react-native';
 
-import Form from './app/components/Form';
+import { StackNavigator } from 'react-navigation';
+import Login from './app/components/Login';
 
-export default class App extends Component<Props> {
+const Application = StackNavigator ({
+    Home: { screen: Login },
+}, {
+    navigationOptions: {
+        header: false,
+    }
+});
+
+export default class App extends React.Component {
   render() {
     return (
-      <KeyboardAvoidingView behavior='padding' style={styles.wrapper}>
-        <ImageBackground style={styles.container} source={require('./app/img/bg.jpg')}>
-          <Text style={styles.header}> Inicio de sesión </Text>
-          <Form/>
-        </ImageBackground>
-      </KeyboardAvoidingView>
+      <Application />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    alignSelf: 'stretch',
-    width: null,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  header: {
-    fontSize: 38,
-    color: '#fff',
-    fontWeight: 'bold',
-    marginBottom: 80,
-  }
-});
