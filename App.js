@@ -6,14 +6,11 @@ import {
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
+
 import Login from './app/components/Login';
 
 const Application = StackNavigator ({
-    Home: { screen: Login },
-}, {
-    navigationOptions: {
-        header: false,
-    }
+  Home: { screen: Login },
 });
 
 export default class App extends React.Component {

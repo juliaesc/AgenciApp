@@ -19,6 +19,10 @@ export default class Login extends React.Component {
     }
   }
 
+  static navigationOptions = {
+      title: 'Welcome',
+  };
+
   componentDidMount() {
     this._loadInitialState().done();
   }
@@ -55,12 +59,12 @@ export default class Login extends React.Component {
             onChangeText={ (password) => this.setState({password}) }
           />
 
-        </View>
+          <TouchableOpacity style={styles.button}
+            onPress = {this.login}>
+            <Text style={styles.btntext}> Iniciar sesión </Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}
-          onPress = {this.login}>
-          <Text style={styles.btntext}> Iniciar sesión </Text>
-        </TouchableOpacity>
+        </View>
 
       </KeyboardAvoidingView>
     );
@@ -84,14 +88,14 @@ const styles = StyleSheet.create({
     paddingRight: 40,
   },
   header: {
-    fontSize: 38,
+    fontSize: 24,
     color: '#fff',
     fontWeight: 'bold',
-    marginBottom: 80,
+    marginBottom: 60,
   },
   textInput: {
     alignSelf: 'stretch',
-    padding: 20,
+    padding: 16,
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     marginBottom: 20,
   },
