@@ -11,6 +11,10 @@ import {
 
 export default class Login extends React.Component {
 
+  static navigationOptions = {
+      title: 'Login',
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -18,10 +22,6 @@ export default class Login extends React.Component {
       password: '',
     }
   }
-
-  static navigationOptions = {
-      title: 'Welcome',
-  };
 
   componentDidMount() {
     this._loadInitialState().done();
@@ -32,6 +32,39 @@ export default class Login extends React.Component {
     if (value !== null) {
       this.props.navigation.navigate('Profile');
     }
+  }
+
+  login = () => {
+
+    const { username } = this.state;
+    const { password } = this.state;
+
+    if(this.state.username==='' || this.state.password==='') {
+      alert('Ingrese usuario y/o contraseña.')
+      return false;
+    }
+
+    fetch('http://10.0.2.2:8090/agenciapp/login/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      })
+    }).then((response) => response.json())
+      .then((responseJson) => {
+
+        if(responseJson === 'username') {
+          this.props.navigation.navigate('Profile: ', {username: username});
+        } else {
+          Alert.alert(responseJson);
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
   }
 
   render() {
@@ -69,34 +102,6 @@ export default class Login extends React.Component {
       </KeyboardAvoidingView>
     );
   }
-
-  login = () => {
-
-    alert(this.state.username);
-
-    fetch('http://192.168.0.107:3000/users', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: this.state.username,
-            password: this.state.password,
-          })
-    })
-
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.success === true) {
-        AsyncStorage.setItem('user', res.user);
-        this.props.navigation.navigate('Profile');
-      } else {
-        alert(res.message);
-      }
-    })
-    .done();
-  }
 }
 
 const styles = StyleSheet.create({
@@ -109,6 +114,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 40,
+
     paddingRight: 40,
   },
   header: {

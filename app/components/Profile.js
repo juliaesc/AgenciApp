@@ -12,9 +12,13 @@ export default class Profile extends React.Component {
   };
 
   render() {
+
+    const { goBack } = this.props.navigation;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> Bienvenido a su perfil </Text>
+        <Text style={styles.text}> Bienvenido a su perfil, { this.props.navigation.state.params.username } </Text>
+        <Button title='Cerrar sesión' onPress={ () => goBack(null)} />
       </View>
     );
   }
