@@ -51,20 +51,18 @@ export default class Login extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: username,
-        password: password,
+        username: this.state.username,
+        password: this.state.password,
       })
     }).then((response) => response.json())
-      .then((responseJson) => {
-
-        if(responseJson === 'username') {
-          this.props.navigation.navigate('Profile: ', {username: username});
+      .then((res) => {
+        if(res.success === true) {
+          AsyncStorage.setItem('user', res.user);
+          this.props.navigation.navigate('Profile');
         } else {
-          Alert.alert(responseJson);
+          alert(res.message);
         }
-      }).catch((error) => {
-        console.error(error);
-      });
+      }).done();
   }
 
   render() {
