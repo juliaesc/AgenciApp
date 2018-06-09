@@ -44,7 +44,8 @@ export default class Login extends React.Component {
       return false;
     }
 
-    fetch('http://10.0.2.2:8090/agenciapp/login/', {
+    //fetch('http://10.0.2.2:8090/agenciapp/login/', {
+    fetch('http://192.168.0.105:8090/agenciapp/login/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
