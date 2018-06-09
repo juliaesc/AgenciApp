@@ -17,8 +17,7 @@ export default class Profile extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> Bienvenido a su perfil, { this.props.navigation.state.params.username } </Text>
-        <Button title='Cerrar sesión' onPress={ () => goBack(null)} />
+        <Text style={styles.text}> Bienvenido a su perfil, { this.props.navigation.state.params } </Text>
       </View>
     );
   }

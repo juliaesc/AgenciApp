@@ -56,11 +56,11 @@ export default class Login extends React.Component {
       })
     }).then((response) => response.json())
       .then((res) => {
-        if(res.success === true) {
-          AsyncStorage.setItem('user', res.user);
-          this.props.navigation.navigate('Profile');
+        if(res.loginSuccess === true) {
+          AsyncStorage.setItem('user', res.username);
+          this.props.navigation.navigate('Profile', res.username);
         } else {
-          alert(res.message);
+          alert(res.loginSuccess);
         }
       }).done();
   }
