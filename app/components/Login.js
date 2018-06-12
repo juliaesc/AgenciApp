@@ -45,7 +45,7 @@ export default class Login extends React.Component {
     }
 
     //fetch('http://10.0.2.2:8090/agenciapp/login/', {
-    fetch('http://192.168.0.105:8090/agenciapp/login/', {
+    fetch('http://192.168.0.189:8090/agenciapp/login/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -57,11 +57,11 @@ export default class Login extends React.Component {
       })
     }).then((response) => response.json())
       .then((res) => {
-        if(res.loginSuccess === true) {
+        if(res.enabled === true) {
           AsyncStorage.setItem('user', res.username);
           this.props.navigation.navigate('Profile', res.username);
         } else {
-          alert(res.loginSuccess);
+          alert(res.enabled);
         }
       }).done();
   }
